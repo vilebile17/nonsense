@@ -1,0 +1,29 @@
+sound(`rd mt rd [rd rd mt],
+insect insect,
+metal metal:1`)
+
+---
+
+### Wednesday
+$: n("<[3 5]*4 [0 2]*4 [3 5]*4 [4 [6, 8]]>")
+  .scale("C:major")
+  .sound("triangle")
+
+$: n("a b").sound("gm_synth_bass_1").lpf("500")
+
+$: note(`<
+c f g b
+c f g a
+>*4`)
+.scale("F:major")
+.sound("piano")
+
+$: note("[a,c,e] [b,d,f]").sound("triangle")
+
+$: sound("- - sd -").bank("ViscoSpaceDrum")
+
+// starts after 4 cycles
+$: sound("< [-] [- - casio:1 -]*4 [-] [- - casio:1 -]*4>/4").lpf("1000")
+
+// start after 8 cycles
+$: n("< [-] [d g - c]*8>/8").sound("jazz")
