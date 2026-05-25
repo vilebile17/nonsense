@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+        <head>
+                <meta charset="UTF-8" />
+                <title>The Money Game</title>
+                <style>
+                        body {
+                                font-family: sans-serif;
+                                margin: 20px;
+                        }
+                        button {
+                                margin: 5px 5px 5px 0;
+                                padding: 8px 14px;
+                                cursor: pointer;
+                        }
+                        #timer,
+                        #counter {
+                                font-weight: bold;
+                                margin: 5px 0;
+                        }
+                </style>
+        </head>
+        <body>
+                <h1>The Money Game</h1>
+                <p>
+                        In this game you are given two options and you have to
+                        pick the option that gives you the most money. Beware,
+                        if you get the answer wrong you won't get anything.
+                        Click start to begin!
+                </p>
+                <button id="startButton">Start</button>
+                <button id="leftButton" disabled>-</button>
+                <button id="rightButton" disabled>-</button>
+                <p id="timer">Time left: 30</p>
+                <p id="money">Money: 10</p>
+
+                <script src="./money_game.js"></script>
+        </body>
+</html>
