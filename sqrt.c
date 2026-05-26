@@ -1,14 +1,10 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 double epicSqrt(double S) {
   if (S == 0.0) {
     return 0.0;
   } else if (S == 1.0) {
     return 1.0;
-  } else if (S < 0.0) {
-    printf("I can't do complex square roots mate...\n");
-    exit(69);
   }
 
   // As wikipedia puts it: "if x is an overestimate, then S/x will be an
@@ -29,7 +25,14 @@ int main() {
   while (1) {
     printf("Enter a number to square root: ");
     scanf("%lf", &n);
-    printf("The square root of %.3f is %.3f\n", n, epicSqrt(n));
+
+    if (n >= 0) {
+      double val = epicSqrt(n);
+      printf("The square root of %.3f is %.3f\n", n, val);
+    } else { // complex square roots
+      double val = epicSqrt(n * -1.0);
+      printf("The square root of %.3f is %.3fi\n", n, val);
+    }
   }
   return 0;
 }
