@@ -9,7 +9,7 @@ from machine import Pin
 
 
 def get_html() -> str:
-    return f"""\
+    return """\
 HTTP/1.1 200 OK
 
 <!DOCTYPE html>

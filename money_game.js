@@ -1,11 +1,16 @@
 let money = 10;
 let countdown = 30;
+let highscore = 0;
+let hasStartedBefore = false;
 
 function updateUI() {
         document.getElementById("timer").textContent =
                 `Time left: ${countdown}`;
         document.getElementById("money").textContent =
                 `Money: ${Math.round(money * 100) / 100}`;
+        if (highscore != 0) {
+                document.getElementById("highscore").textContent = `Highscore: ${Math.round(highscore * 100 / 100}`;
+        }
 }
 
 function tick() {
@@ -18,6 +23,9 @@ function tick() {
                 document.getElementById("startButton").disabled = false;
                 document.getElementById("leftButton").disabled = true;
                 document.getElementById("rightButton").disabled = true;
+                if (money > highscore) {
+                        highscore = money;
+                }
         }
         updateUI();
 }
@@ -98,17 +106,25 @@ function addMoney(buttonName) {
 function onStart() {
         document.getElementById("leftButton").disabled = false;
         document.getElementById("rightButton").disabled = false;
-        document.getElementById("leftButton").addEventListener(
-                "click",
-                addMoney("leftButton"),
-        );
-        document.getElementById("rightButton").addEventListener(
-                "click",
-                addMoney("rightButton"),
-        );
-        fillButtons();
-        setInterval(tick, 1000);
         document.getElementById("startButton").disabled = true;
+        countdown = 30;
+        money = 10;
+
+        if (!hasStartedBefore) {
+                document.getElementById("leftButton").addEventListener(
+                        "click",
+                        addMoney("leftButton"),
+                );
+                document.getElementById("rightButton").addEventListener(
+                        "click",
+                        addMoney("rightButton"),
+                );
+                setInterval(tick, 1000);
+        }
+        
+        hasStartedBefore = true;
+        fillButtons();
+        updateUI();
 }
 
 document.getElementById("startButton").addEventListener("click", onStart);
