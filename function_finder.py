@@ -159,15 +159,27 @@ def main():
     # return
 
     if "-h" in argv or len(argv) == 1:
-        print("function_finder.py finds a function given a list of coordinates")
+        print(
+            "\033[33mfunction_finder.py\033[0m finds a \033[36mpolynomial function\033[0m that fits a list of coordinates"
+        )
+        print(
+            "(can also be used to find the \033[36mnth term\033[0m of a sequence btw)"
+        )
         print()
-        print("USAGE: python3 function_finder.py '(x1,y1)' '(x2,y2)' ... '(xn,yn)'")
-        print("Note that each coordinate must be surrounded by quotation marks due")
+        print(
+            "\033[31mUSAGE:\033[0m python3 \033[33mfunction_finder.py\033[0m '(x1,y1)' '(x2,y2)' ... '(xn,yn)'"
+        )
+        print(
+            "Note that each coordinate must be surrounded by \033[36mquotation marks\033[0m due"
+        )
         print("to the way that the terminal parses brackets")
         print()
-        print("E.g. python3 function_finder.py '(0,8)' '(5,33)' '(2,6)' ")
+        print(
+            "\033[31mE.g.\033[0m python3 \033[33mfunction_finder.py\033[0m '(0,8)' '(5,33)' '(2,6)' "
+        )
+        print("-> f(x) = 2.0x^2 - 5.0x + 8.0")
         print()
-        print("Flags: -h -> help message")
+        print("\033[31mFlags:\033[0m -h -> help message")
         print("       -V -> verbose printing")
         return
 
