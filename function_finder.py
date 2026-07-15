@@ -103,7 +103,7 @@ def parse_coordinate(coord: str) -> Tuple[float, float]:
         y_num = float(y)
     except Exception as e:
         raise ValueError(
-            f"Invalid coordinate: {e}, try python3 function_finder.py --help if you're confused"
+            f"Invalid coordinate: {e}, try python3 function_finder.py --h if you're confused"
         )
 
     return (x_num, y_num)
@@ -167,7 +167,7 @@ def main():
         )
         print()
         print(
-            "\033[31mUSAGE:\033[0m python3 \033[33mfunction_finder.py\033[0m '(x1,y1)' '(x2,y2)' ... '(xn,yn)'"
+            "\033[31mUSAGE:\033[0m python3 function_finder.py '(x1,y1)' '(x2,y2)' ... '(xn,yn)'"
         )
         print(
             "Note that each coordinate must be surrounded by \033[36mquotation marks\033[0m due"
@@ -175,7 +175,7 @@ def main():
         print("to the way that the terminal parses brackets")
         print()
         print(
-            "\033[31mE.g.\033[0m python3 \033[33mfunction_finder.py\033[0m '(0,8)' '(5,33)' '(2,6)' "
+            "\033[31mE.g.\033[0m python3 function_finder.py '(0,8)' '(5,33)' '(2,6)' "
         )
         print("-> f(x) = 2.0x^2 - 5.0x + 8.0")
         print()
