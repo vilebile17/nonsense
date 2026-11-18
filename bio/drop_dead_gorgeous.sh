@@ -1,0 +1,7 @@
+echo '3'
+echo '0 0'
+echo '1 1'
+echo '2 2'
+echo '1 0'
+echo '2 1'
+echo '0 2'
