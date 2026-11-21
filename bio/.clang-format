@@ -1,0 +1,5 @@
+# .clang-format
+BasedOnStyle: Google # (or LLVM, or Microsoft, if you prefer a specific style)
+IndentWidth: 4
+UseTab: Never
+TabWidth: 4
