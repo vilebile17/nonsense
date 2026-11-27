@@ -1,3 +1,5 @@
+from time import time
+
 digits_to_letters: dict[str, str] = {
         "0": "ZERO",
         "1": "ONE",
@@ -14,56 +16,73 @@ digits_to_letters: dict[str, str] = {
 def num_to_letters(num: str) -> str:
         return "".join([digits_to_letters[digit] for digit in num])
 
+all_nums_as_letters = [num_to_letters(str(n)) for n in range(1,1000)]
+
 def can_be_transformed(num1: str, num2: str) -> bool:
-        matches = 0
-        og_num2_len = len(num2)
+        num1dic: dict[str, int] = {}
+        for digit in num1:
+                if digit not in num1dic:
+                        num1dic[digit] = 1
+                else:
+                        num1dic[digit] += 1
 
-        # This loop goes through every char in num1 and matches it to the same char
-        # in num2 (if it exists) to create a kind of venn-diagram; the matches variable
-        # stores the number of letters in num1 which have a corresponding char in num2
-        for char1 in num1:
-                i = 0
-                while i < len(num2):
-                        if char1 == num2[i]:
-                                matches += 1
-                                num2 = num2[:i] + num2[i + 1:]
-                                break
-                        else:
-                                i += 1
+        num2dic: dict[str, int] = {}
+        for digit in num2:
+                if digit not in num2dic:
+                        num2dic[digit] = 1
+                else:
+                        num2dic[digit] += 1
 
-        # This finds the number of un-matched letters by taking the combined total
-        # number of letters and subtracting double the amount of matches (since
-        # there are two instances of that letter, one in each number)
-        return (len(num1) + og_num2_len) - 2 * matches <= 5
+        letters = set(num1).union(set(num2))
+        differences = 0
+        for letter in letters:
+                if letter in num1dic and letter in num2dic:
+                        differences += abs(num1dic[letter] - num2dic[letter])
+                elif letter in num1dic:
+                        differences += num1dic[letter]
+                elif letter in num2dic:
+                        differences += num2dic[letter]
+
+        return differences <= 5
 
 def get_direct_transformations(num: str) -> list[str]:
-        possible_nums = [num_to_letters(str(n)) for n in range(1,1000)]
-        return list(filter(lambda n: can_be_transformed(num, n), possible_nums))
+        return list(filter(lambda n: can_be_transformed(num, n), all_nums_as_letters))
 
-def main() -> None:
-        inp1 = input("").split(" ")
-
-        num1let = num_to_letters(inp1[0])
-        num2let = num_to_letters(inp1[1])
-
-        nums_to_check = get_direct_transformations(num1let)
-        already_seen = set()
-        i = 1
+def find_num_transformations(num1: str, num2: str, master_dic: dict[str, list[str]]) -> int:
+        nums_to_check: set[str] = set()
+        nums_to_check.add(num1)
+        already_seen: set[str] = set()
+        i = 0
         while True:
-                new_nums_to_check = []
+                new_nums_to_check: set[str] = set()
                 for num in nums_to_check:
                         if num in already_seen:
                                 continue
-                        if num == num2let:
-                                print(i)
-                                return
+                        if num == num2:
+                                return i
 
                         already_seen.add(num)
-                        new_nums_to_check.extend(
-                                filter(lambda x: x not in already_seen, get_direct_transformations(num))
+                        new_nums_to_check = new_nums_to_check.union(
+                                filter(lambda x: x not in already_seen, master_dic[num])
                         )
                 nums_to_check = new_nums_to_check
                 i += 1
+
+def main() -> None:
+        inputs = [input("").split(" ") for _ in range(3)]
+
+        begin = time()
+        master_dic: dict[str, list[str]] = {}
+        for num in all_nums_as_letters:
+                master_dic[num] = get_direct_transformations(num)
+
+        print(time() - begin)
+        begin = time()
+
+        for input_pair in inputs:
+                num1 = num_to_letters(input_pair[0])
+                num2 = num_to_letters(input_pair[1])
+                print(find_num_transformations(num1, num2, master_dic))
 
 if __name__ == "__main__":
         main()
